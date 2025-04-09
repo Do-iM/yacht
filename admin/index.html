@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>관리자</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- <link rel="stylesheet" href="/css/main.css"> -->
+</head>
+<body>
+    <main>
+        <div style="display: flex">
+            <div style="flex: 1">
+                <h3>승선신고서 작성 URL [한글/좌]</h3>
+                <h4 id="ko-url"></h4>
+                <h3>승선신고서 작성 URL [영문/우]</h3>
+                <h4 id="en-url"></h4>
+            </div>
+            <img id="ko-qrcode" class="qrcode" />
+            <img id="en-qrcode" class="qrcode" />
+        </div>
+        <br>
+        <h3>총 <span id="count">??</span>건</h3>
+        <div class="hbox">
+            <input type="date" id="date" />
+            <select id="time">
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+                <option value="22:30">22:30</option>
+                <option value="23:00">23:00</option>
+            </select>
+        </div>
+        <br>
+        <table class="simple">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="all" /></th>
+                    <th>번호</th>
+                    <th>팀번호</th>
+                    <th>승선번호</th>
+                    <th>이름</th>
+                    <th>성별</th>
+                    <th>생년월일</th>
+                    <th>연락처</th>
+                </tr>
+            </thead>
+            <tbody id="table">
+            </tbody>
+        </table>
+    </main>
+    <script type="module" src="/js/common/datetime.js"></script>
+    <script type="module" src="/js/admin/build.js"></script>
+</body>
+</html>

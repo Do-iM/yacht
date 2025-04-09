@@ -1,0 +1,112 @@
+
+.greet {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.greet .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #234;
+}
+
+.greet .subtitle {
+    font-size: 0.9rem;
+    color: #789;
+}
+
+.service-item {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.service-item img {
+    aspect-ratio: 1.5;
+    width: 100%;
+    border-radius: 0.1rem;
+}
+
+.service-item.selected img {
+    outline: 5px solid #0d6efd;
+}
+
+button.selected {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.term-list {
+    background-color: var(--background-secondary);
+    /* border: 1px solid var(--pico-form-element-border-color); */
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.term-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.term-list ul li {
+    padding-right: 1rem;
+    font-weight: bold;
+}
+
+.agreement {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.desc {
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+.final-btn .circle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+}
+
+.final-btn#add .circle {
+    background-color: #06f;
+}
+
+.final-btn#submit .circle {
+    background-color: #3c9;
+}
+
+.final-btn svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.final-btn .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #234;
+}
+
+.final-btn .subtitle {
+    font-size: 0.9rem;
+    color: #789;
+}
+
+.privacy {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #789;
+}
+
+.finished {
+    text-align: center;
+}
