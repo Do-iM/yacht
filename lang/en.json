@@ -39,5 +39,7 @@
     "privacy": "Personal information will be used solely for passenger verification purposes.",
     "finished": "Submission Completed",
     "thanks": "Thank you",
+    "input-name": "Enter the real name",
+    "input-number": "Enter only numbers",
     "header": "Boarding Confirmation"
 }

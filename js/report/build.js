@@ -1,10 +1,11 @@
 import { bindButtons, keyButtons, selectButtons } from '../common/buttons.js'
 import { clearTable } from '../common/tables.js';
 import { buildTemplate } from '../common/template.js'
+import * as Common from './build_common.js'
 
 export const serviceItems = {
     'BALI 4.3': document.getElementById('item1'),
-    'BALI 5.4': document.getElementById('item2'),
+    'BALI 4.0': document.getElementById('item2'),
 }
 
 bindButtons(serviceItems, (key) => {
@@ -31,10 +32,6 @@ const editGenderButtons = {
 bindButtons(editGenderButtons)
 
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id');
-const key = crypto.randomUUID();
-
 const nameInput = document.getElementById('name-input')
 const birthInput = document.getElementById('birth-input');
 const male = document.querySelector('#section4 button#male')
@@ -53,65 +50,65 @@ export let users = []
 let popupUser
 
 function userRow(user) {
-  const name = document.createElement('td')
-  name.textContent = user.name
-  const birth = document.createElement('td')
-  birth.textContent = user.birth
-  const gender = document.createElement('td')
-  gender.textContent = user.gender
-  const phone = document.createElement('td')
-  phone.textContent = user.phone
-  const edit = document.createElement('td')
-  const editButton = buildTemplate('b-edit')
-  const deleteButton = buildTemplate('b-delete')
-  editButton.addEventListener('click', () => {
-    popupUser = user
-    nameInputEdit.value = user.name
-    birthInputEdit.value = user.birth
-    selectButtons(editGenderButtons, user.gender)
-    phoneInputEdit.value = user.phone
-    popupA.hidden = false
-  })
-  deleteButton.addEventListener('click', () => {
-    users = users.filter(item => item !== user)
-    clearTable(tbody)
-    users.forEach(item => {
-        tbody.appendChild(userRow(item))
+    const name = document.createElement('td')
+    name.textContent = user.name
+    const birth = document.createElement('td')
+    birth.textContent = user.birth
+    const gender = document.createElement('td')
+    gender.textContent = user.gender
+    const phone = document.createElement('td')
+    phone.textContent = user.phone
+    const edit = document.createElement('td')
+    const editButton = buildTemplate('b-edit')
+    const deleteButton = buildTemplate('b-delete')
+    editButton.addEventListener('click', () => {
+        popupUser = user
+        nameInputEdit.value = user.name
+        birthInputEdit.value = user.birth
+        selectButtons(editGenderButtons, user.gender)
+        phoneInputEdit.value = user.phone
+        popupA.hidden = false
     })
-  })
+    deleteButton.addEventListener('click', () => {
+        users = users.filter(item => item !== user)
+        clearTable(tbody)
+        users.forEach(item => {
+            tbody.appendChild(userRow(item))
+        })
+    })
 
-  edit.appendChild(editButton)
-  edit.appendChild(deleteButton)
-  const tr = document.createElement('tr')
-  tr.appendChild(name)
-  tr.appendChild(birth)
-  tr.appendChild(gender)
-  tr.appendChild(phone)
-  tr.appendChild(edit)
-  return tr
+    edit.appendChild(editButton)
+    edit.appendChild(deleteButton)
+    const tr = document.createElement('tr')
+    tr.appendChild(name)
+    tr.appendChild(birth)
+    tr.appendChild(gender)
+    if (Common.usePhone()) tr.appendChild(phone)
+    tr.appendChild(edit)
+    return tr
 }
 
 function addUser(gender) {
-  const user = {
-    name: nameInput.value,
-    birth: birthInput.value,
-    gender: gender,
-    phone: noPhoneCheckbox.checked ? '' : phoneInput.value,
-    user_id: id,
-    key: key,
-  }
+    const user = {
+        name: nameInput.value,
+        birth: birthInput.value,
+        gender: gender,
+        phone: noPhoneCheckbox.checked ? '' : phoneInput.value,
+        user_id: Common.id,
+        key: Common.key,
+    }
 
-  nameInput.value = ''
-  nameInput.dispatchEvent(new Event('input'));
-  birthInput.value = ''
-  birthInput.dispatchEvent(new Event('input'));
-  phoneInput.value = ''
-  noPhoneCheckbox.checked = false
-  noPhoneCheckbox.dispatchEvent(new Event('input'));
+    nameInput.value = ''
+    nameInput.dispatchEvent(new Event('input'));
+    birthInput.value = ''
+    birthInput.dispatchEvent(new Event('input'));
+    phoneInput.value = ''
+    noPhoneCheckbox.checked = false
+    noPhoneCheckbox.dispatchEvent(new Event('input'));
 
-  users.push(user)
-  const tr = userRow(user)
-  tbody.appendChild(tr)
+    users.push(user)
+    const tr = userRow(user)
+    tbody.appendChild(tr)
 }
 
 male.addEventListener('click', () => {

@@ -203,5 +203,6 @@ div.badge.red {
 }
 
 .qrcode {
-    aspect-ratio: 1;
+    width: 12rem;
+    height: 12rem;
 }

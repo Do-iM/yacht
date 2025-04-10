@@ -110,3 +110,9 @@ button.selected {
 .finished {
     text-align: center;
 }
+
+.flag {
+    height: 2rem;
+    position: absolute;
+    transform: translateY(-25%);
+}

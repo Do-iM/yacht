@@ -3,25 +3,34 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>관리자</title>
+    <title>선박 관리</title>
     <link rel="stylesheet" href="../css/reset.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
     <link rel="stylesheet" href="../css/common.css">
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
+    <template id="b-report">
+        <div class="badge jade" style="margin: auto">승선신고서</div>
+    </template>
+    <template id="b-edit">
+        <div class="badge jade" style="margin: auto">수정</div>
+    </template>
+    <template id="b-delete">
+        <div class="badge red" style="margin: auto">삭제</div>
+    </template>
     <main>
         <div style="display: flex">
             <div style="flex: 1">
-                <h3>승선신고서 작성 URL [한글/좌]</h3>
-                <h4 id="ko-url"></h4>
-                <h3>승선신고서 작성 URL [영문/우]</h3>
-                <h4 id="en-url"></h4>
+                <h3>승선신고서 작성 URL</h3>
+                <h4 id="url"></h4>
+                <button id="tab1">선박입출항기록</button>
+                <button id="tab2">승선신고서</button>
+                <button id="tab3">승선신고서 엑셀</button>
             </div>
-            <img id="ko-qrcode" class="qrcode" />
-            <img id="en-qrcode" class="qrcode" />
+            <img id="qrcode" class="qrcode" />
         </div>
         <br>
         <h3>총 <span id="count">??</span>건</h3>
@@ -55,8 +64,25 @@
                 <option value="22:30">22:30</option>
                 <option value="23:00">23:00</option>
             </select>
+            <select id="yacht">
+                <option value="BALI 4.3">BALI 4.3</option>
+                <option value="BALI 4.0">BALI 4.0</option>
+            </select>
+            <input type="date" id="date1" />
+            <input type="date" id="date2" />
         </div>
         <br>
+        <table class="simple">
+            <thead>
+                <tr>
+                    <th>출항정보</th>
+                    <th>인원</th>
+                    <th>승선신고서</th>
+                </tr>
+            </thead>
+            <tbody id="table1">
+            </tbody>
+        </table>
         <table class="simple">
             <thead>
                 <tr>
@@ -68,12 +94,118 @@
                     <th>성별</th>
                     <th>생년월일</th>
                     <th>연락처</th>
+                    <th><button type="button" style="background-color: red; color: white; width: 100px;" id="delete-selected">선택삭제</button></th>
                 </tr>
             </thead>
-            <tbody id="table">
+            <tbody id="table2">
             </tbody>
         </table>
+        <table class="excel">
+            <thead>
+                <tr>
+                    <th>날짜</th>
+                    <th>시간</th>
+                    <th>요트</th>
+                    <th>서비스</th>
+                    <th>이름</th>
+                    <th>생년월일</th>
+                    <th>성별</th>
+                    <th>연락처</th>
+                    <th>작성시간</th>
+                </tr>
+            </thead>
+            <tbody id="table3">
+            </tbody>
+        </table>
+        <div id="print-section">
+            <br><hr><br>
+            <div class="hbox">
+                <label>선원 입력:<input type="text" id="input-names" /></label>
+                <button type="button" class="primary" onclick="print()">선박입출항기록 출력</button>
+            </div>
+            <div id="printArea">
+                <h3 style="text-align: center;">선박 출항·입항 기록·관리 대장</h3>
+                <br>
+                <table class="print">
+                    <tbody>
+                        <tr>
+                            <th colspan="7">1. 선박 제원 및 승선 인원 현황</th>
+                        </tr>
+                        <tr>
+                            <td>선 명</td>
+                            <td colspan="3" id="print-yacht"></td>
+                            <td>톤 수</td>
+                            <td colspan="2" id="print-ton"></td>
+                        </tr>
+                        <tr>
+                            <td>최대 승선 인원</td>
+                            <td colspan="3" id="print-count"></td>
+                            <td>선원</td>
+                            <td colspan="2" id="print-names"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="7">2. 출항 입항 사항</th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">출 항</td>
+                            <td colspan="3">입 항</td>
+                            <td>기록자</td>
+                        </tr>
+                        <tr>
+                            <td>일시</td>
+                            <td>출항지</td>
+                            <td>승선인원</td>
+                            <td>일시</td>
+                            <td>입항지</td>
+                            <td>하선인원</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody id="print-times">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <section id="popup" class="popup" hidden>
+            <div class="popup-content">
+                <h3>정보 수정</h3>
+                <hr>
+                <table class="none">
+                    <tbody>
+                        <tr>
+                            <td>이름</td>
+                            <td><input type="text" id="edit-name-input" data-i18n="input-name" /></td>
+                        </tr>
+                        <tr>
+                            <td>생년월일</td>
+                            <td>
+                                <input type="text" id="edit-birth-input" inputmode="numeric" pattern="\d*" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>성별</td>
+                            <td><div class="hbox">
+                                <button type="button" id="edit-male">남</button>
+                                <button type="button" id="edit-female">여</button>
+                            </div></td>
+                        </tr>
+                        <tr>
+                            <td>연락처</td>
+                            <td>
+                                <input type="text" id="edit-phone-input" inputmode="numeric" pattern="\d*" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <div class="hbox">
+                    <button type="button" id="btn-edit-cancel" class="secondary">취소</button>
+                    <button type="button" id="btn-edit-apply" class="primary">수정</button>
+                </div>
+            </div>
+        </section>
     </main>
+    <script type="module" src="../js/common/template.js"></script>
     <script type="module" src="../js/common/datetime.js"></script>
     <script type="module" src="../js/admin/build.js"></script>
 </body>

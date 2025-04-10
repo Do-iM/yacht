@@ -1,10 +1,7 @@
 import { insert } from '../common/supabase.js'
+import * as Common from './build_common.js'
 import { serviceItems, serviceTypes, users } from './build.js'
 import { keyButtons } from '../common/buttons.js'
-
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id');
-const key = crypto.randomUUID();
 
 const submit = document.getElementById('submit')
 
@@ -18,15 +15,7 @@ submit.addEventListener('click', () => {
     time: timeSelect.value,
     service_item: keyButtons(serviceItems),
     service_type: keyButtons(serviceTypes),
-    user_id: id,
-    key: key,
+    user_id: Common.id,
+    key: Common.key,
   })
 })
-
-
-
-
-
-
-
-

@@ -64,18 +64,18 @@
             <br>
             <div class="grid2">
                 <div id="item1" class="service-item selected">
-                    <img src="https://picsum.photos/id/1/300/200" />
+                    <img src="../img/bali43.jpg" />
                     <p>BALI 4.3</p>
                 </div>
                 <div id="item2" class="service-item">
-                    <img src="https://picsum.photos/id/2/300/200" />
-                    <p>BALI 5.4</p>
+                    <img src="../img/bali40.jpg" />
+                    <p>BALI 4.0</p>
                 </div>
             </div>
             <h3><i-paper></i-paper><span data-i18n="services"></span></h3>
             <div class="hbox">
-                <button type="button" id="btn-private" class="selected" data-i18n="private"></button>
-                <button type="button" id="btn-public" data-i18n="public"></button>
+                <button type="button" id="btn-public" data-i18n="public" class="selected"></button>
+                <button type="button" id="btn-private" data-i18n="private"></button>
             </div>
 
             <h3><i-time></i-time><span data-i18n="hours"></span></h3>
@@ -137,7 +137,7 @@
                 <h3><b-back></b-back><span data-i18n="reporting"></span></h3>
                 <hr>
                 <h3><i-paper></i-paper><span data-i18n="name"></span></h3>
-                <input type="text" id="name-input" placeholder="실명을 입력하세요" />
+                <input type="text" id="name-input" data-i18n="input-name" />
                 <br><br>
                 <button class="next primary" disabled data-i18n="next"></button>
             </section>
@@ -145,7 +145,7 @@
                 <h3><b-back></b-back><span data-i18n="reporting"></span></h3>
                 <hr>
                 <h3><i-paper></i-paper><span data-i18n="birth"></span></h3>
-                <input type="text" id="birth-input" placeholder="숫자만 입력하세요" inputmode="numeric" pattern="\d*" />
+                <input type="text" id="birth-input" data-i18n="input-number" inputmode="numeric" pattern="\d*" />
                 <div class="desc" data-i18n="birth-ex"></div>
                 <br>
                 <button class="next primary" disabled data-i18n="next"></button>
@@ -155,7 +155,7 @@
                 <hr>
                 <h3><i-paper></i-paper><span data-i18n="phone"></span></h3>
                 <br>
-                <input type="text" id="phone-input" placeholder="숫자만 입력하세요" inputmode="numeric" pattern="\d*" />
+                <input type="text" id="phone-input" data-i18n="input-number" inputmode="numeric" pattern="\d*" />
                 <br><br>
                 <label><input type="checkbox" id="no-phone-checkbox" /><span data-i18n="no-phone"></span></label>
                 <br><br>
@@ -193,7 +193,7 @@
                             <th data-i18n="name"></th>
                             <th data-i18n="birth"></th>
                             <th data-i18n="gender"></th>
-                            <th data-i18n="phone"></th>
+                            <th data-i18n="phone" data-korean></th>
                             <th data-i18n="edit"></th>
                         </tr>
                     </thead>
@@ -203,6 +203,12 @@
             </section>
             <div class="privacy" data-i18n="privacy"></div>
         </section>
+        <section id="sectionD" hidden>
+            <div class="finished">
+                <h2 data-i18n="finished"></h2>
+                <h3 data-i18n="thanks"></h3>
+            </div>
+        </section>
         <section id="popupA" class="popup" hidden>
             <div class="popup-content">
                 <h3 class="center"><i-paper></i-paper><span data-i18n="edit-member"></span></h3>
@@ -211,12 +217,12 @@
                     <tbody>
                         <tr>
                             <td data-i18n="name"></td>
-                            <td><input type="text" id="edit-name-input" placeholder="실명을 입력하세요" /></td>
+                            <td><input type="text" id="edit-name-input" data-i18n="input-name" /></td>
                         </tr>
                         <tr>
                             <td data-i18n="birth"></td>
                             <td>
-                                <input type="text" id="edit-birth-input" placeholder="숫자만 입력하세요" inputmode="numeric" pattern="\d*" />
+                                <input type="text" id="edit-birth-input" data-i18n="input-number" inputmode="numeric" pattern="\d*" />
                             </td>
                         </tr>
                         <tr>
@@ -226,10 +232,10 @@
                                 <button type="button" id="edit-female" data-i18n="female"></button>
                             </div></td>
                         </tr>
-                        <tr>
+                        <tr data-korean>
                             <td data-i18n="phone"></td>
                             <td>
-                                <input type="text" id="edit-phone-input" placeholder="숫자만 입력하세요" inputmode="numeric" pattern="\d*" />
+                                <input type="text" id="edit-phone-input" data-i18n="input-number" inputmode="numeric" pattern="\d*" />
                             </td>
                         </tr>
                     </tbody>
@@ -241,10 +247,12 @@
                 </div>
             </div>
         </section>
-        <section id="sectionD" hidden>
-            <div class="finished">
-                <h2 data-i18n="finished"></h2>
-                <h3 data-i18n="thanks"></h3>
+        <section id="popupB" class="popup">
+            <div class="popup-content">
+                <button type="button" id="korean"><img src="../img/Kor.png" class="flag">한국어</button>
+                <button type="button" id="english"><img src="../img/Eng.png" class="flag">English</button>
+                <button type="button" id="japanese"><img src="../img/Jpn.png" class="flag">日本語</button>
+                <button type="button" id="chinese"><img src="../img/Chn.png" class="flag">中文</button>
             </div>
         </section>
     </main>
@@ -252,6 +260,8 @@
     <script type="module" src="../js/common/template.js"></script>
     <script type="module" src="../js/common/datetime.js"></script>
     <script type="module" src="../js/report/navigation.js"></script>
+    <script type="module" src="../js/report/build_common.js"></script>
+    <script type="module" src="../js/report/build_early.js"></script>
     <script type="module" src="../js/report/build.js"></script>
     <script type="module" src="../js/report/build_late.js"></script>
 </body>

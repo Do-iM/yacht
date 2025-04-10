@@ -1,4 +1,6 @@
 
+import * as Common from './build_common.js'
+
 const sectionA = document.getElementById('sectionA')
 const sectionB = document.getElementById('sectionB')
 const sectionC = document.getElementById('sectionC')
@@ -9,9 +11,7 @@ const section3 = document.getElementById('section3')
 const section4 = document.getElementById('section4')
 const section5 = document.getElementById('section5')
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id');
-if (id) {
+if (Common.id) {
     sectionA.hidden = false
     section1.hidden = false
 }
@@ -44,7 +44,13 @@ function move(a, b) {
 nextA.addEventListener('click', move(sectionA, sectionB))
 nextB.addEventListener('click', move(sectionB, sectionC))
 next1.addEventListener('click', move(section1, section2))
-next2.addEventListener('click', move(section2, section3))
+next2.addEventListener('click', _ => {
+    if (Common.usePhone()) {
+        move(section2, section3)()
+    } else {
+        move(section2, section4)()
+    }
+})
 next3.addEventListener('click', move(section3, section4))
 male.addEventListener('click', move(section4, section5))
 female.addEventListener('click', move(section4, section5))

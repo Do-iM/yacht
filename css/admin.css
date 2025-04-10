@@ -1,0 +1,70 @@
+
+button.selected {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    #printArea, #printArea * {
+        visibility: visible;
+    }
+    #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 21cm;
+        height: 29.7cm;
+        padding: 1cm;
+        box-sizing: border-box;
+    }
+}
+
+/* A4 사이즈 미리보기용 (화면에서 볼 때) */
+#printArea {
+    width: 21cm;
+    height: 29.7cm;
+    margin: 20px auto;
+    padding: 0 1cm;
+    background: white;
+}
+
+table.print {
+    font-size: 0.8rem;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+table.print tbody th {
+    text-align: left;
+    height: 3rem;
+    padding: 0 0.8rem;
+    border: 1px solid black;
+}
+
+table.print tbody td {
+    text-align: center;
+    height: 2.5rem;
+    background-color: white;
+    border: 1px solid black;
+}
+
+table.excel {
+    font-size: 0.8rem;
+    border-collapse: collapse;
+}
+
+table.excel thead th {
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+table.excel tbody td {
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+}
