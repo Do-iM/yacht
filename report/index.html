@@ -83,8 +83,11 @@
                 <input type="date" id="date" />
                 <select id="time">
                     <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
                     <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
                     <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
                     <option value="12:00">12:00</option>
                     <option value="12:30">12:30</option>
                     <option value="13:00">13:00</option>
@@ -186,7 +189,7 @@
                         <div class="subtitle"><span data-i18n="submit-text1"></span><br><span data-i18n="submit-text2"></span></div>
                     </button>
                 </div>
-                <h3><i-paper></i-paper><span data-i18n="list"></span></h3>
+                <h3><i-paper></i-paper><span data-i18n="list"></span> [<span id="count"></span>]</h3>
                 <table class="round">
                     <thead>
                         <tr>
@@ -253,6 +256,14 @@
                 <button type="button" id="english"><img src="../img/Eng.png" class="flag">English</button>
                 <button type="button" id="japanese"><img src="../img/Jpn.png" class="flag">日本語</button>
                 <button type="button" id="chinese"><img src="../img/Chn.png" class="flag">中文</button>
+            </div>
+        </section>
+        <section id="popupC" class="popup" hidden>
+            <div class="popup-content">
+                <h3 data-i18n="confirm"></h3>
+                <br>
+                <button type="button" id="confirm-apply" data-i18n="submit" class="primary"></button>
+                <button type="button" id="confirm-cancel" data-i18n="cancel"></button>
             </div>
         </section>
     </main>

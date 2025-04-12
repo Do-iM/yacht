@@ -41,5 +41,6 @@
     "thanks": "Thank you",
     "input-name": "Enter the real name",
     "input-number": "Enter only numbers",
+    "confirm": "Show this screen to staff.",
     "header": "Boarding Confirmation"
 }

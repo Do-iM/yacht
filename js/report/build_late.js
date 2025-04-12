@@ -3,12 +3,12 @@ import * as Common from './build_common.js'
 import { serviceItems, serviceTypes, users } from './build.js'
 import { keyButtons } from '../common/buttons.js'
 
-const submit = document.getElementById('submit')
+const confirmApply = document.getElementById('confirm-apply')
 
 const dateInput = document.getElementById('date')
 const timeSelect = document.getElementById('time')
 
-submit.addEventListener('click', () => {
+confirmApply.addEventListener('click', () => {
   insert('customers', users)
   insert('teams', {
     date: dateInput.value,

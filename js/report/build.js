@@ -46,6 +46,7 @@ const nameInputEdit = document.getElementById('edit-name-input')
 const birthInputEdit = document.getElementById('edit-birth-input');
 const phoneInputEdit = document.getElementById('edit-phone-input');
 
+const countSpan = document.getElementById('count')
 export let users = []
 let popupUser
 
@@ -75,6 +76,7 @@ function userRow(user) {
         users.forEach(item => {
             tbody.appendChild(userRow(item))
         })
+        countSpan.textContent = users.length
     })
 
     edit.appendChild(editButton)
@@ -109,6 +111,7 @@ function addUser(gender) {
     users.push(user)
     const tr = userRow(user)
     tbody.appendChild(tr)
+    countSpan.textContent = users.length
 }
 
 male.addEventListener('click', () => {
@@ -139,4 +142,19 @@ editApply.addEventListener('click', _ => {
     })
     popupA.hidden = true
 })
+
+const popupC = document.getElementById('popupC')
+const submit = document.getElementById('submit')
+const confirmCancel = document.getElementById('confirm-cancel')
+const confirmApply = document.getElementById('confirm-apply')
+submit.addEventListener('click', _ => {
+    popupC.hidden = false
+})
+confirmCancel.addEventListener('click', _ => {
+    popupC.hidden = true
+})
+confirmApply.addEventListener('click', _ => {
+    popupC.hidden = true
+})
+
 
